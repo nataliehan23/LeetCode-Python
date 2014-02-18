@@ -1,24 +1,32 @@
-class Solution:
-    # @param s, a string
-    # @param dict, a set of string
-    # @return a boolean
-    def wordBreak(self, s, dict):
-        if len(s) == 0:
-            return False
-        ss = len(s)
-        mp =  [[False for i in range(ss)] for j in range(ss)]
-        
-        for i in range(ss):
-            for j in range(i, ss):
-                if s[i:j+1] in dict:
+def wordBreak(s, dict):
+    if len(s) == 0:
+        return False
+    ss = len(s)
+
+    print "string length is:", ss
+
+    mp = [[False for i in range(ss)] for j in range(ss)]
+    print mp
+
+    for i in range(ss):
+        for j in range(i, ss):
+            print "i",i
+            print "j", j
+            print s[i:j+1]
+            if s[i:j+1] in dict:
                     mp[i][j] = True
 
-        
-        for i in range(ss):
-            for j in range(i, ss):
-                for k in range(i, j):
-                    if mp[i][j]==False:
-                        mp[i][j] = mp[i][k] and mp[k+1][j]
-        
-        return mp[0][ss-1]
-        
+    print mp
+
+    for i in range(ss):
+        for j in range(i, ss):
+            for k in range(i, j):
+                if mp[i][j]==False:
+                    mp[i][j] = mp[i][k] and mp[k+1][j]
+    print mp
+    
+    return mp[0][ss-1]
+
+s = "cars"
+dict = ["car","ca","rs"]
+print wordBreak(s, dict)
